@@ -1,30 +1,25 @@
 import functions from './index';
 
-const inning = function() {
-    return Math.floor(Math.random() * Math.floor(3));
+const takimSkoru = function() {
+    return Math.floor(Math.random() * 16+10);
   }
   
 
 describe('asFunction', ()=>{
     it('as returns sa', ()=>{
-        expect(functions.foo()).toBe('as');
-    })
-});
-
-describe('takimSkoru', ()=>{
-    it('takimSkoru returns a random number', ()=>{
-        expect(functions.takimSkoru()).toBeLessThanOrEqual(25);
+        expect(functions.sa()).toBe('as');
     })
 });
 
 describe('macSkoru', ()=>{
     it('maxSkoru returns an object', ()=>{
-        expect(functions.macSkoru(takimSkoru, 4)).toEqual(expect.objectContaining({
+        expect(functions.macSonucu(takimSkoru, 4)).toEqual(expect.objectContaining({
             EvSahibi: expect.any(Number),
             KonukTakim: expect.any(Number),
           }))
     })
 });
+
 
 describe('periyotSkoru', ()=>{
     it('periyotSkoru returns an object', ()=>{

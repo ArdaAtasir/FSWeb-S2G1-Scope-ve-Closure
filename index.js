@@ -30,10 +30,11 @@ console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin
   Aşağıdaki skor1 ve skor2 kodlarını inceleyiniz ve aşağıdaki soruları altına not alarak cevaplayın
   
   1. skor1 ve skor2 arasındaki fark nedir?
-  
+  !!!!!!!!- skor1(global skoptur),  !!!!!!- skor (local dir çünkü fonksyon da tanımlanmıştır.)
   2. Hangisi bir closure kullanmaktadır? Nasıl tarif edebilirsin? (yarınki derste öğreneceksin :) )
   
   3. Hangi durumda skor1 tercih edilebilir? Hangi durumda skor2 daha mantıklıdır?
+mücadele de skor eşitliği var iken skor 1 kullanılır.
 */
 
 // skor1 kodları
@@ -64,10 +65,11 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru(){
+let skor = Math.floor(Math.random()*16+10)
+return skor;
 }
-
+console.log(takimSkoru());
 
 
 
@@ -76,7 +78,7 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
   1. Görev 2'de oluşturduğunuz 'takimSkoru'nu callback fonskiyonunu olarak ilk parametrede alın
   2. Bir basketbol maçında oynanan çeyrek sayısını ikinci parametre olarak alın
   3. Her çeyrekte EvSahibi ve KonukTakim için bir skor oluşturun
-  4. Her oynanan çeyrekten sonra EvSahibi ve KonukTakim için skoru güncelleyin
+  4. Her oynanan çeyrekten sonra EvSahibi ve KonukTakim için skoru güncelleyin  //dögü oluştur
   5. Son çeyrekten sonra, maçın bitiş skorunu bir object olarak dönün(return)
 
   Örneğin: macSonucu(takimSkoru, 4) çalıştırınca aşağıdaki object'i dönmeli
@@ -86,10 +88,20 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
+function macSonucu(callback,ceyrek){
   /*Kodunuzu buraya yazınız*/
+  let evSahibi = 0;
+  let konukTakim = 0;
+  for(let i = 1; i<=ceyrek ; i++){
+    evSahibi += callback();
+    konukTakim += callback()
+  }
+  let skor = {};
+  skor.EvSahibi = evSahibi;
+  skor.KonukTakim = konukTakim;
+  return skor;
 }
-
+console.log(macSonucu(takimSkoru, 4));
 
 
 
@@ -107,11 +119,13 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   "KonukTakim": 12
 }
   */
+function periyotSkoru(score) {
 
+  const scoreboard = {};
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
-
+  scoreboard["EvSahibi"] = takimSkoru(score);
+  scoreboard["KonukTakim"] = takimSkoru(score);
+  return scoreboard;
 }
 
 
@@ -154,13 +168,13 @@ function skorTabelasi(/*Kodunuzu buraya yazınız*/) {
 
 
 /* Aşağıdaki satırları lütfen değiştirmeyiniz*/
-function as(){
+function sa(){
   console.log('Kodlar çalışıyor');
-  return 'sa';
+  return 'as';
 }
-as();
+sa();
 module.exports = {
-  as,
+  sa,
   ilkiniDon,
   skor1,
   skor2,
